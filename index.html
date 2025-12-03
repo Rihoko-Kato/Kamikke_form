@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おもいが流れる回路展 - アンケート</title>
+  <style>
+    /* 全体のデザイン */
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    /* カードのデザイン */
+    .card {
+      background: white;
+      width: 100%;
+      max-width: 400px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    h1 {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #555;
+    }
+    /* 入力エリアのデザイン */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #444;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box; /* 枠からはみ出さないおまじない */
+      font-size: 16px;
+      background-color: #fafafa;
+      transition: 0.3s;
+    }
+    input[type="text"]:focus, textarea:focus {
+      border-color: #888;
+      background-color: white;
+      outline: none;
+    }
+    /* 送信ボタンのデザイン */
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #000;
+    }
+    button:disabled {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>おもいが流れる回路展<br>感想フォーム</h1>
+    
+    <form id="myForm">
+      <div class="form-group">
+        <label>📍 どこ？</label>
+        <input type="text" name="where" placeholder="例：帰り道、お風呂の中" required>
+      </div>
+
+      <div class="form-group">
+        <label>👀 どんな状況？</label>
+        <input type="text" name="situation" placeholder="例：空を見上げたとき" required>
+      </div>
+
+      <div class="form-group">
+        <label>✨ どんな神様？</label>
+        <input type="text" name="kind" placeholder="例：すきま風の神様" required>
+      </div>
+
+      <div class="form-group">
+        <label>💭 どう思った？</label>
+        <textarea name="thought" rows="4" placeholder="あなたの思いを書いてね" required></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">送信する</button>
+    </form>
+  </div>
+
+  <script>
+    // ★★★ ここにさっきコピーしたGASのURLを貼ってね！ ★★★
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbwaXB1bbr6DGDjmVQIwf3FAHbYnF07_BTEZvwYukzy3vLEXKiH7PD8uCZEL2QAsmqGpOg/exec';
+
+    const form = document.getElementById('myForm');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault(); // 画面が切り替わるのを防ぐ
+      btn.disabled = true;
+      btn.textContent = '送信中...';
+
+      // 入力されたデータを集める
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+
+      // GASに送る！
+      fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify(data) // JSONという形式で送る
+      })
+      .then(response => response.json())
+      .then(json => {
+        alert('送信しました！ありがとうございます。');
+        form.reset(); // 入力を空にする
+        btn.disabled = false;
+        btn.textContent = '送信する';
+      })
+      .catch(err => {
+        alert('送信に失敗しました。もう一度試してみてください。');
+        console.error(err);
+        btn.disabled = false;
+        btn.textContent = '送信する';
+      });
+    });
+  </script>
+
+</body>
+</html>
