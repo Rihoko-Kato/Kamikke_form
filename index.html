@@ -142,19 +142,6 @@
       width: 100%;
       max-width: 440px;
       margin-top: 40px;
-      /* 横スクロールできるようにする */
-      display: flex;
-      overflow-x: auto;
-      padding-bottom: 20px; /* スクロールバーと影のための余白 */
-      gap: 16px; /* カード同士の間隔 */
-      
-      /* スクロールバーを隠す（見た目スッキリ） */
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-    }
-    /* Chrome, Safari, Opera */
-    #posts-area::-webkit-scrollbar {
-      display: none;
     }
 
     /* 投稿カード */
@@ -162,21 +149,62 @@
       background: #ffffff;
       padding: 20px;
       border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      animation: fadeIn 0.5s ease;
-      
-      /* 横並び用の設定 */
-      flex: 0 0 85%; /* 画面幅の85%の幅を持つ（少し次のカードが見える） */
-      scroll-snap-align: start; /* スクロールした時にピタッと止まる */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 16px;
+      cursor: pointer; /* クリックできる感 */
+      transition: all 0.2s ease;
       border: 1px solid #f3f4f6;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* タイトル部分 */
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .post-card h3 {
       font-size: 16px;
-      margin-bottom: 12px;
       color: #111827;
-      border-bottom: 2px solid #f3f4f6;
-      padding-bottom: 8px;
+      margin: 0;
+      flex: 1;
+      font-weight: 700;
+    }
+
+    /* 開閉アイコン */
+    .toggle-icon {
+      font-size: 12px;
+      color: #9ca3af;
+      transition: transform 0.3s ease;
+      margin-left: 10px;
+    }
+
+    /* 詳細エリア（最初は隠す） */
+    .post-details {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #f3f4f6;
+      animation: slideDown 0.3s ease;
+    }
+    
+    /* 開いたときのスタイル */
+    .post-card.open .post-details {
+      display: block;
+    }
+
+    .post-card.open .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .post-card p {
@@ -300,17 +328,26 @@
         timeString = now.toLocaleString('ja-JP');
       }
 
+      // HTML構造：ヘッダー（常時表示）と詳細（隠す）
       card.innerHTML = `
-        <h3>✨ ${escapeHtml(data.kind)}</h3>
-        <p>📍 ${escapeHtml(data.where)}</p>
-        <p>👀 ${escapeHtml(data.situation)}</p>
-        <p>💭 ${escapeHtml(data.thought)}</p>
-        <div class="meta">${timeString}</div>
+        <div class="post-header">
+          <h3>✨ ${escapeHtml(data.kind)}</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="post-details">
+          <p>📍 ${escapeHtml(data.where)}</p>
+          <p>👀 ${escapeHtml(data.situation)}</p>
+          <p>💭 ${escapeHtml(data.thought)}</p>
+          <div class="meta">${timeString}</div>
+        </div>
       `;
 
+      // クリックイベント：開閉切り替え
+      card.addEventListener('click', () => {
+        card.classList.toggle('open');
+      });
+
       // 先頭に追加（新しいものが上に来るように）
-      // ※読み込み時はサーバー側でソート済みなら appendChild でもいいが、
-      // ここではシンプルに prepend のままにします
       postsArea.prepend(card);
     }
 
