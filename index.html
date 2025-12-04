@@ -224,7 +224,7 @@
 
   <script>
     // ★★★ ここにGASのURLを貼り直してね！ ★★★
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBkHpJO7AEylqFJi71TNpi82H4LMW87j7I79XqihjeNTBDu1bem2Yly983JCyXWSrb/exec';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz_xmQhfHEAqpMFVfS5Ub9s-vG4ugDKZMBTEJ8RNa2M2_fbpC8ChzeScf3g13KQcOqulg/exec';
 
     const form = document.getElementById('myForm');
     const btn = document.getElementById('submitBtn');
@@ -266,16 +266,19 @@
     });
 
     // 画面に投稿を追加する関数
-    function addPostToScreen(data) {
+    function addPostToScreen(data, customTime = null) {
       const postsArea = document.getElementById('posts-area');
       
       // カードのHTMLを作る
       const card = document.createElement('div');
       card.className = 'post-card';
       
-      // 現在時刻
-      const now = new Date();
-      const timeString = now.toLocaleString('ja-JP');
+      // 時刻：引数で渡されればそれを使い、なければ現在時刻
+      let timeString = customTime;
+      if (!timeString) {
+        const now = new Date();
+        timeString = now.toLocaleString('ja-JP');
+      }
 
       card.innerHTML = `
         <h3>✨ ${escapeHtml(data.kind)}</h3>
@@ -286,8 +289,30 @@
       `;
 
       // 先頭に追加（新しいものが上に来るように）
+      // ※読み込み時はサーバー側でソート済みなら appendChild でもいいが、
+      // ここではシンプルに prepend のままにします
       postsArea.prepend(card);
     }
+
+    // ページ読み込み時にデータを取得する
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch(GAS_URL)
+        .then(response => response.json())
+        .then(data => {
+          // 取得したデータは「新しい順」になっている前提で、
+          // prepend すると逆順（古いのが上）になってしまうため、
+          // ここでは逆順にループさせるか、addPostToScreen の挙動を考慮する。
+          // シンプルに「古い順」で取得して prepend していけば「新しいのが上」になる。
+          
+          // データが配列で返ってくる想定
+          data.forEach(post => {
+            addPostToScreen(post, post.timestamp);
+          });
+        })
+        .catch(err => {
+          console.log('まだデータがないか、読み込みに失敗しました', err);
+        });
+    });
 
     // XSS対策（念のため）
     function escapeHtml(str) {
