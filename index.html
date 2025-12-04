@@ -53,15 +53,23 @@
       font-size: 22px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 20px;
       letter-spacing: 0.05em;
     }
 
-    .subtitle {
-      text-align: center;
+    /* 挨拶文 */
+    .greeting-text {
       font-size: 14px;
-      color: #6b7280;
+      color: #4b5563;
       margin-bottom: 32px;
+      text-align: left;
+      line-height: 1.8;
+    }
+    .greeting-text p {
+      margin-bottom: 12px;
+    }
+    .greeting-text p:last-child {
+      margin-bottom: 0;
     }
 
     /* フォーム周り */
@@ -254,7 +262,13 @@
 
   <div class="container">
     <h1>✨神様をみつけました！</h1>
-    <p class="subtitle">あなたが日常で見つけた神様を教えて下さい。</p>
+    
+    <div class="greeting-text">
+      <p>この度は「おもいが流れる回路展」へのご来場、誠にありがとうございました。</p>
+      <p>"かみっけ"の展示をご覧になり、「神様がいるかもしれないと思って日常を見た時、どんなことを思ったか」、その率直なご感想をぜひお聞かせください。</p>
+      <p>私たちの展示が、あなたの日常の見え方を少しでも変えるきっかけになっていれば幸いです。</p>
+      <p>皆さまの貴重な視点と発見を、心よりお待ちしております。</p>
+    </div>
 
     <form id="myForm">
       <div class="form-group">
@@ -369,6 +383,15 @@
 
       // クリックイベント：開閉切り替え
       card.addEventListener('click', () => {
+        // 他のすべてのカードを閉じる（一つだけ開くようにする）
+        const allCards = document.querySelectorAll('.post-card');
+        allCards.forEach(c => {
+          if (c !== card) {
+            c.classList.remove('open');
+          }
+        });
+
+        // 自分自身の開閉を切り替える
         card.classList.toggle('open');
       });
 
