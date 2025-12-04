@@ -279,9 +279,9 @@
 
       card.innerHTML = `
         <h3>✨ ${escapeHtml(data.kind)}</h3>
-        <p><strong>📍 場所:</strong> ${escapeHtml(data.where)}</p>
-        <p><strong>👀 状況:</strong> ${escapeHtml(data.situation)}</p>
-        <p><strong>💭 感想:</strong> ${escapeHtml(data.thought)}</p>
+        <p>📍 ${escapeHtml(data.where)}</p>
+        <p>👀 ${escapeHtml(data.situation)}</p>
+        <p>💭 ${escapeHtml(data.thought)}</p>
         <div class="meta">${timeString}</div>
       `;
 
