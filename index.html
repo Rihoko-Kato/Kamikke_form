@@ -220,6 +220,7 @@
   </div>
 
   <!-- ここに投稿が追加されていく -->
+  <div id="loading-msg" style="text-align:center; margin-top:20px; color:#666;">読み込み中...</div>
   <div id="posts-area"></div>
 
   <script>
@@ -296,21 +297,34 @@
 
     // ページ読み込み時にデータを取得する
     window.addEventListener('DOMContentLoaded', () => {
+      const loadingMsg = document.getElementById('loading-msg');
+
       fetch(GAS_URL)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('サーバーエラー: ' + response.status);
+          }
+          return response.json();
+        })
         .then(data => {
-          // 取得したデータは「新しい順」になっている前提で、
-          // prepend すると逆順（古いのが上）になってしまうため、
-          // ここでは逆順にループさせるか、addPostToScreen の挙動を考慮する。
-          // シンプルに「古い順」で取得して prepend していけば「新しいのが上」になる。
+          loadingMsg.style.display = 'none'; // 読み込み完了したら消す
           
+          if (!data || data.length === 0) {
+             loadingMsg.textContent = 'まだ投稿はありません';
+             loadingMsg.style.display = 'block';
+             return;
+          }
+
           // データが配列で返ってくる想定
           data.forEach(post => {
             addPostToScreen(post, post.timestamp);
           });
         })
         .catch(err => {
-          console.log('まだデータがないか、読み込みに失敗しました', err);
+          console.error(err);
+          // エラー内容を画面に出す
+          loadingMsg.innerHTML = '読み込みに失敗しました。<br>GASのデプロイが「新しいデプロイ」で更新されていない可能性があります。<br>エラー詳細: ' + err.message;
+          loadingMsg.style.color = 'red';
         });
     });
 
