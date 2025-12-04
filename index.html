@@ -64,6 +64,9 @@
       margin-bottom: 32px;
       text-align: left;
       line-height: 1.8;
+      width: 100%;
+      max-width: 440px;
+      padding: 0 10px;
     }
     .greeting-text p {
       margin-bottom: 12px;
@@ -254,21 +257,39 @@
       font-size: 12px;
       color: #6b7280;
     }
+
+    /* 研究室情報（最下部） */
+    .lab-info {
+      margin-top: 60px;
+      margin-bottom: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.8;
+    }
+    .lab-info .members {
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .lab-info .privacy-note {
+      font-size: 11px;
+      color: #9ca3af;
+    }
   </style>
 </head>
 <body>
 
   <h1 class="main-title">かみっけ</h1>
 
+  <div class="greeting-text">
+    <p>この度は「おもいが流れる回路展」へのご来場、誠にありがとうございました。</p>
+    <p>"かみっけ"の展示をご覧になり、「神様がいるかもしれないと思って日常を見た時、どんなことを思ったか」、その率直なご感想をぜひお聞かせください。</p>
+    <p>私たちの展示が、あなたの日常の見え方を少しでも変えるきっかけになっていれば幸いです。</p>
+    <p>皆さまの貴重な視点と発見を、心よりお待ちしております。</p>
+  </div>
+
   <div class="container">
     <h1>✨神様をみつけました！</h1>
-    
-    <div class="greeting-text">
-      <p>この度は「おもいが流れる回路展」へのご来場、誠にありがとうございました。</p>
-      <p>"かみっけ"の展示をご覧になり、「神様がいるかもしれないと思って日常を見た時、どんなことを思ったか」、その率直なご感想をぜひお聞かせください。</p>
-      <p>私たちの展示が、あなたの日常の見え方を少しでも変えるきっかけになっていれば幸いです。</p>
-      <p>皆さまの貴重な視点と発見を、心よりお待ちしております。</p>
-    </div>
 
     <form id="myForm">
       <div class="form-group">
@@ -308,6 +329,13 @@
   <!-- ここに投稿が追加されていく -->
   <div id="loading-msg" style="text-align:center; margin-top:20px; color:#666;">読み込み中...</div>
   <div id="posts-area"></div>
+
+  <!-- 研究室情報 -->
+  <div class="lab-info">
+    <p>法政大学デザイン工学部システムデザイン学科<br>Affective Design Lab</p>
+    <p class="members">KATO RIHOKO / SUGIYAMA NANA / YOSHIDA YUI</p>
+    <p class="privacy-note">本フォームで収集した情報は研究目的のみに使用します</p>
+  </div>
 
   <script>
     // ★★★ ここにGASのURLを貼り直してね！ ★★★
