@@ -86,12 +86,21 @@
     }
 
     label {
-      display: block;
+      display: flex; /* アイコンと文字を横並びに */
+      align-items: center;
       font-size: 14px;
       font-weight: 400; /* 細さを統一 */
       color: #374151;
       margin-bottom: 8px;
       text-align: left; /* 左揃え */
+    }
+    
+    /* アイコン画像 */
+    .label-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      object-fit: contain;
     }
 
     /* 入力欄のデザイン（ここが今風ポイント！） */
@@ -317,26 +326,38 @@
   </div>
 
   <div class="container">
-    <h1>✨神様をみつけました！</h1>
+    <h1>かみさまみーっけ！</h1>
 
     <form id="myForm">
       <div class="form-group">
-        <label for="where">📍 どこ？</label>
+        <label for="where">
+          <img src="images/icon_pin.png" class="label-icon" alt="どこ">
+          どこ？
+        </label>
         <input type="text" id="where" name="where" placeholder="例：自分の部屋、大学の出入り口" required>
       </div>
 
       <div class="form-group">
-        <label for="situation">👀 どんな状況？</label>
+        <label for="situation">
+          <img src="images/icon_chat.png" class="label-icon" alt="状況">
+          どんな状況？
+        </label>
         <input type="text" id="situation" name="situation" placeholder="例：作業の間にふと視線をずらしたらインクが目に入った" required>
       </div>
 
       <div class="form-group">
-        <label for="kind">✨ どんな神様？</label>
+        <label for="kind">
+          <img src="images/icon_sparkle.png" class="label-icon" alt="神様">
+          どんな神様？
+        </label>
         <input type="text" id="kind" name="kind" placeholder="例：使ってないものに視線を誘導する神様" required>
       </div>
 
       <div class="form-group">
-        <label for="thought">💭 どう思った？</label>
+        <label for="thought">
+          <img src="images/icon_heart.png" class="label-icon" alt="感想">
+          どう思った？
+        </label>
         <textarea id="thought" name="thought" placeholder="最近使ってないけどもういらないかな？いや、結構大事かも..." required></textarea>
       </div>
 
@@ -426,13 +447,13 @@
       // HTML構造：ヘッダー（常時表示）と詳細（隠す）
       card.innerHTML = `
         <div class="post-header">
-          <h3>✨ ${escapeHtml(data.kind)}</h3>
+          <h3><img src="images/icon_sparkle.png" class="label-icon" style="width:16px;height:16px;vertical-align:middle;"> ${escapeHtml(data.kind)}</h3>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="post-details">
-          <p>📍 ${escapeHtml(data.where)}</p>
-          <p>👀 ${escapeHtml(data.situation)}</p>
-          <p>💭 ${escapeHtml(data.thought)}</p>
+          <p><img src="images/icon_pin.png" class="label-icon" style="width:16px;height:16px;vertical-align:middle;"> ${escapeHtml(data.where)}</p>
+          <p><img src="images/icon_chat.png" class="label-icon" style="width:16px;height:16px;vertical-align:middle;"> ${escapeHtml(data.situation)}</p>
+          <p><img src="images/icon_heart.png" class="label-icon" style="width:16px;height:16px;vertical-align:middle;"> ${escapeHtml(data.thought)}</p>
           <div class="meta">${timeString}</div>
         </div>
       `;
