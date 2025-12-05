@@ -759,12 +759,11 @@
         timeString = now.toLocaleString('ja-JP');
       }
 
-      // 例示用のバッジ
-      const exampleBadge = isExample ? '<span style="position:absolute; top:-10px; left:10px; background:#D4B5B0; color:#fff; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:bold;">例</span>' : '';
+      // 例示用のバッジ（削除）
+      // const exampleBadge = isExample ? '<span style="position:absolute; top:-10px; left:10px; background:#D4B5B0; color:#fff; font-size:10px; padding:2px 8px; border-radius:10px; font-weight:bold;">例</span>' : '';
 
       // HTML構造：ヘッダー（常時表示）と詳細（隠す）
       card.innerHTML = `
-        ${exampleBadge}
         <div class="post-header">
           <h3><img src="images/icon_sparkle.png" class="label-icon" style="width:16px;height:16px;vertical-align:middle;"> ${escapeHtml(data.kind)}</h3>
           <span class="toggle-icon">▼</span>
@@ -816,25 +815,16 @@
           }
 
           // データが配列で返ってくる想定
-          // 1. まず普通の投稿を表示
           data.forEach(post => {
-            // スプレッドシートの1行目（項目名）はスキップ
-            if (post.where === 'where' || post.where === 'どこ？' || post.where === 'どこ' || post.timestamp === 'timestamp') {
-              return;
+            // スプレッドシートの1行目（項目名）かどうかを判定
+            // 項目名が含まれる場合は「例」として特別なスタイルで表示する
+            let isHeader = false;
+            if (post.where === 'where' || post.where === 'どこ？' || post.where === 'どこ' || post.timestamp === 'timestamp' || post.timestamp === '日時') {
+              isHeader = true;
             }
-            addPostToScreen(post, post.timestamp);
-          });
 
-          // 2. 最後に「例」として固定表示したいデータを追加（prependなので一番上に来る）
-          // ここではスプレッドシートの1行目ではなく、手動で綺麗な例を作成して表示します
-          const examplePost = {
-            kind: '使ってないものに視線を誘導する神様',
-            where: '自分の部屋、大学の出入り口',
-            situation: '作業の間にふと視線をずらしたらインクが目に入った',
-            thought: '最近使ってないけどもういらないかな？いや、結構大事かも...',
-            timestamp: '2025/12/05 12:00:00'
-          };
-          addPostToScreen(examplePost, examplePost.timestamp, true); // true = 例として表示
+            addPostToScreen(post, post.timestamp, isHeader);
+          });
         })
         .catch(err => {
           console.error(err);
