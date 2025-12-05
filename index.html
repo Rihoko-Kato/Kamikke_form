@@ -49,13 +49,17 @@
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     }
 
-    /* タイトル */
-    h1 {
+    /* コンテナ内のタイトル */
+    .container h1 {
       font-size: 22px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 20px;
       letter-spacing: 0.05em;
+      
+      /* 白いラインを追加 */
+      border-bottom: 2px solid #ffffff;
+      padding-bottom: 16px;
+      margin-bottom: 32px;
     }
 
     /* 挨拶文 */
@@ -84,9 +88,10 @@
     label {
       display: block;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400; /* 細さを統一 */
       color: #374151;
       margin-bottom: 8px;
+      text-align: left; /* 左揃え */
     }
 
     /* 入力欄のデザイン（ここが今風ポイント！） */
@@ -94,6 +99,7 @@
       width: 100%;
       padding: 12px 16px;
       font-size: 16px;
+      font-weight: 400; /* 細さを統一 */
       color: #111827;
       background-color: #f9fafb;
       border: 1px solid #e5e7eb;
