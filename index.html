@@ -747,6 +747,7 @@
       
       // 例示用のスタイル
       if (isExample) {
+        card.classList.add('header-card'); // 識別用のクラスを追加
         card.style.background = '#fff0f5'; // 薄いピンク
         card.style.border = '2px dashed #D4B5B0';
         card.style.position = 'relative';
@@ -790,8 +791,21 @@
         card.classList.toggle('open');
       });
 
-      // 先頭に追加（新しいものが上に来るように）
-      postsArea.prepend(card);
+      // 投稿の追加位置を制御
+      if (isExample) {
+        // 1行目（例）は常に一番上に追加
+        postsArea.prepend(card);
+      } else {
+        // それ以外の投稿は、1行目（例）のすぐ下に追加していく
+        // これにより、新しい投稿ほど上（例の直下）に来るようになります
+        const headerCard = postsArea.querySelector('.header-card');
+        if (headerCard) {
+          headerCard.after(card);
+        } else {
+          // 万が一ヘッダーがない場合は一番上へ
+          postsArea.prepend(card);
+        }
+      }
     }
 
     // ページ読み込み時にデータを取得する
