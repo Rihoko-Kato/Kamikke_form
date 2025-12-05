@@ -3757,6 +3757,23 @@ Status: **completed**
 
 **変更点:**
 *   `✨` → `icon_sparkle.png`
+*   `📍` → `icon_pin.png`
+*   `👀` → `icon_chat.png`
+*   `💭` → `icon_heart.png`
+
+サイズも少し小さめ（16px）にして、文章の中に自然に馴染むように調整しています。
+これで入力欄と投稿一覧のデザインが統一されました！確認してみてください。
+
+---
+
+_**User (2025-12-05 09:33+0900)**_
+
+かみっけの文字をもっと大きくかつ、下の文章とちょっとだけ近づけて欲しい！！ふぉんとを　かみっけ　だけ　Shippori Mincho　にかえて
+
+---
+
+_**Agent (model copilot/gemini-3-pro-preview)**_
+
 
 
 ---
