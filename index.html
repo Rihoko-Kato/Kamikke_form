@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Noto+Serif+JP:wght@200&family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     /* リセットCSS（ブラウザの癖をなくす） */
@@ -113,13 +113,16 @@
 
     /* メインタイトル */
     .main-title {
-      font-family: 'Noto Serif JP', serif;
+      font-family: 'Hina Mincho', serif;
       font-size: 120px;
-      font-weight: 200;
+      font-weight: 400;
       text-align: center;
-      margin-bottom: 16px;
-      color: #111827;
-      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      color: #4A3B32; /* 温かみのある濃いブラウン */
+      letter-spacing: 0.15em;
+      text-shadow: 2px 2px 0px #fff, 0 0 20px rgba(255, 255, 255, 0.8); /* 白い縁取りと光彩 */
+      position: relative;
+      z-index: 1;
     }
 
     /* カード本体のデザイン */
@@ -191,27 +194,38 @@
     input[type="text"], textarea {
       width: 100%;
       padding: 12px 16px;
+      padding-right: 40px; /* アイコンの分だけ右を空ける */
       font-size: 16px;
       font-weight: 400; /* 細さを統一 */
-      color: #111827;
-      background-color: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      transition: all 0.2s ease;
+      color: #4A3B32; /* 文字色も少しブラウンに */
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 2px solid transparent; /* 枠線は透明にして背景色で表現 */
+      border-radius: 24px; /* 丸っこく */
+      transition: all 0.3s ease;
       font-family: inherit;
+      
+      /* 内側に少し影を落として奥行きを出す */
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05), 0 2px 5px rgba(0,0,0,0.05);
+
+      /* 右端に梅のマークをちょこんと配置 */
+      background-image: url('images/梅.png');
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 18px;
     }
 
     /* 入力しようとした時に枠線が光る */
     input[type="text"]:focus, textarea:focus {
       outline: none;
       background-color: #fff;
-      border-color: #000; /* 黒で引き締める */
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+      border-color: #D4B5B0; /* ピンクベージュっぽい色 */
+      box-shadow: 0 0 0 4px rgba(212, 181, 176, 0.3); /* ふわっとした光 */
     }
 
     textarea {
       resize: vertical; /* 縦だけ伸ばせるように */
       min-height: 100px;
+      background-position: right 12px top 12px; /* テキストエリアは右上に配置 */
     }
 
     /* 送信ボタン */
