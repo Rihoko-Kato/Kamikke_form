@@ -46,11 +46,30 @@
       position: absolute;
       border-radius: 50%;
       opacity: 0.8; /* 少し透けさせる */
+      animation: float 6s ease-in-out infinite;
     }
 
     .bg-img {
       position: absolute;
       opacity: 0.6;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* ふわふわアニメーション */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+
+    /* 回転している画像用のアニメーション（回転を維持しつつ動かす） */
+    @keyframes float-rotate-minus-10 {
+      0%, 100% { transform: rotate(-10deg) translateY(0); }
+      50% { transform: rotate(-10deg) translateY(-30px); }
+    }
+
+    @keyframes float-rotate-plus-10 {
+      0%, 100% { transform: rotate(10deg) translateY(0); }
+      50% { transform: rotate(10deg) translateY(-30px); }
     }
 
     /* 色の定義 */
@@ -60,26 +79,37 @@
 
     /* 配置（イメージ画像の雰囲気に合わせる） */
     /* 左上 */
-    .shape-1 { width: 300px; height: 300px; top: -50px; left: -100px; } /* ベージュ */
-    .shape-2 { width: 100px; height: 100px; top: 150px; left: 50px; } /* ブルー */
+    .shape-1 { width: 300px; height: 300px; top: -50px; left: -100px; animation-duration: 7s; } /* ベージュ */
+    .shape-2 { width: 100px; height: 100px; top: 150px; left: 50px; animation-duration: 5s; animation-delay: 1s; } /* ブルー */
     
     /* 右上 */
-    .shape-3 { width: 400px; height: 400px; top: -100px; right: -100px; } /* ピンク */
+    .shape-3 { width: 400px; height: 400px; top: -100px; right: -100px; animation-duration: 8s; animation-delay: 2s; } /* ピンク */
     
     /* 左下 */
-    .shape-4 { width: 200px; height: 200px; bottom: 10%; left: -50px; } /* ブルー */
-    .shape-5 { width: 150px; height: 150px; bottom: 25%; left: 10%; } /* ベージュ */
+    .shape-4 { width: 200px; height: 200px; bottom: 10%; left: -50px; animation-duration: 6s; animation-delay: 0.5s; } /* ブルー */
+    .shape-5 { width: 150px; height: 150px; bottom: 25%; left: 10%; animation-duration: 9s; animation-delay: 1.5s; } /* ベージュ */
 
     /* 右下 */
-    .shape-6 { width: 350px; height: 350px; bottom: -50px; right: -50px; } /* ベージュ */
-    .shape-7 { width: 120px; height: 120px; bottom: 200px; right: 50px; } /* ピンク */
+    .shape-6 { width: 350px; height: 350px; bottom: -50px; right: -50px; animation-duration: 7.5s; animation-delay: 0.2s; } /* ベージュ */
+    .shape-7 { width: 120px; height: 120px; bottom: 200px; right: 50px; animation-duration: 5.5s; animation-delay: 2.5s; } /* ピンク */
 
     /* 画像の配置 */
-    .img-wave-1 { width: 200px; top: 20%; left: 20%; transform: rotate(-10deg); }
-    .img-wave-2 { width: 250px; bottom: 15%; right: 20%; transform: rotate(10deg); }
-    .img-plum-1 { width: 80px; top: 15%; right: 30%; opacity: 0.5; }
-    .img-plum-2 { width: 60px; bottom: 30%; left: 15%; opacity: 0.5; }
-    .img-plum-3 { width: 100px; top: 50%; left: 5%; opacity: 0.4; }
+    .img-wave-1 { 
+      width: 200px; top: 20%; left: 20%; 
+      transform: rotate(-10deg); 
+      animation-name: float-rotate-minus-10; 
+      animation-duration: 7s; 
+    }
+    .img-wave-2 { 
+      width: 250px; bottom: 15%; right: 20%; 
+      transform: rotate(10deg); 
+      animation-name: float-rotate-plus-10; 
+      animation-duration: 8s; 
+      animation-delay: 1s; 
+    }
+    .img-plum-1 { width: 80px; top: 15%; right: 30%; opacity: 0.5; animation-duration: 6.5s; animation-delay: 1s; }
+    .img-plum-2 { width: 60px; bottom: 30%; left: 15%; opacity: 0.5; animation-duration: 7.2s; animation-delay: 0.5s; }
+    .img-plum-3 { width: 100px; top: 50%; left: 5%; opacity: 0.4; animation-duration: 5.8s; animation-delay: 2s; }
 
     /* メインタイトル */
     .main-title {
