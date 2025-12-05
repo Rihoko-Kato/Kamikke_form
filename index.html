@@ -806,6 +806,12 @@
 
           // データが配列で返ってくる想定
           data.forEach(post => {
+            // スプレッドシートの1行目（項目名）が表示されてしまうのを防ぐ
+            // 中身が「where」や「どこ？」などの項目名そのものの場合はスキップ
+            if (post.where === 'where' || post.where === 'どこ？' || post.where === 'どこ' || post.timestamp === 'timestamp') {
+              return;
+            }
+
             addPostToScreen(post, post.timestamp);
           });
         })
