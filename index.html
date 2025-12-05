@@ -429,15 +429,22 @@
       margin-bottom: 16px;
     }
 
+    .hashtag-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap; /* スマホで横幅が足りない時に折り返す */
+      margin-top: 8px;
+    }
+
     .hashtag {
-      font-size: 20px;
+      font-size: 18px; /* 2つ並ぶので少し小さく */
       font-weight: 700;
       color: #D4B5B0; /* ピンク */
       background: #fff;
-      padding: 8px 24px;
+      padding: 8px 20px;
       border-radius: 50px;
       display: inline-block;
-      margin-top: 8px;
       box-shadow: 0 4px 10px rgba(212, 181, 176, 0.3);
       letter-spacing: 0.05em;
     }
@@ -623,12 +630,15 @@
 
   <!-- 写真投稿のお願い -->
   <div class="photo-campaign">
-    <h3>神様カード配布中！</h3>
+    <h3>神様と一緒に写真を撮ろう！</h3>
     <p>展示会場で配布している「神様カード」と一緒に、<br>
     あなたが神様を感じた風景の写真を撮ってみませんか？</p>
     <p>撮った写真はハッシュタグをつけて<br>
     ぜひSNSに投稿してください！</p>
-    <div class="hashtag">#かみっけ</div>
+    <div class="hashtag-container">
+      <div class="hashtag">#かみっけ</div>
+      <div class="hashtag">#おもいが流れる回路展</div>
+    </div>
   </div>
 
   <!-- 研究室情報 -->
