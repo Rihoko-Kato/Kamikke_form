@@ -40,7 +40,7 @@
 
     /* カード本体のデザイン */
     .container {
-      background: #ffffff;
+      background: #B8C5C9;
       width: 100%;
       max-width: 440px; /* スマホで見やすい幅 */
       padding: 40px 30px;
@@ -119,7 +119,7 @@
     button {
       width: 100%;
       padding: 14px;
-      background-color: #000; /* 真っ黒でかっこよく */
+      background-color: #314158;
       color: #fff;
       font-size: 16px;
       font-weight: 700;
@@ -131,7 +131,7 @@
     }
 
     button:hover {
-      background-color: #333; /* ホバーで少し明るく */
+      background-color: #435670; /* ホバーで少し明るく */
       transform: translateY(-1px); /* 少し浮く */
     }
 
@@ -262,19 +262,39 @@
     /* 研究室情報（最下部） */
     .lab-info {
       margin-top: 60px;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
       text-align: center;
-      font-size: 12px;
-      color: #6b7280;
-      line-height: 1.8;
+      font-size: 14px;
+      color: #475569; /* 少し青みがかったグレー */
+      line-height: 2.0;
+
+      /* 半透明の白いカード */
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px); /* すりガラスのような効果 */
+      padding: 40px 20px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 700px; /* 横長に */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
+    
     .lab-info .members {
-      margin-bottom: 16px;
+      margin-top: 8px;
+      margin-bottom: 24px;
       font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #64748b;
     }
+    
     .lab-info .privacy-note {
-      font-size: 11px;
-      color: #9ca3af;
+      font-size: 12px;
+      color: #64748b;
+      border-top: 1px solid #cbd5e1; /* 薄い区切り線 */
+      padding-top: 24px;
+      margin-top: 8px;
+      width: 90%; /* 線を少し短く */
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 </head>
