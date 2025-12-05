@@ -313,6 +313,45 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    /* --- レスポンシブ対応（PC向け） --- */
+    .content-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .posts-column {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (min-width: 900px) {
+      /* PC画面では横並びにする */
+      .content-wrapper {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start; /* 上揃え */
+        gap: 60px; /* フォームと投稿一覧の間隔 */
+        max-width: 1000px;
+      }
+
+      /* 挨拶文も少し広く */
+      .greeting-text {
+        max-width: 800px;
+        margin-bottom: 60px;
+      }
+
+      /* 投稿一覧ヘッダーの調整 */
+      .posts-section-header {
+        margin-top: 0; /* 横並びになるので上の余白はいらない */
+        margin-bottom: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -326,59 +365,63 @@
     <p>皆さまの貴重な視点と発見を、心よりお待ちしております。</p>
   </div>
 
-  <div class="container">
-    <h1>かみさまみーっけ！</h1>
+  <div class="content-wrapper">
+    <div class="container">
+      <h1>かみさまみーっけ！</h1>
 
-    <form id="myForm">
-      <div class="form-group">
-        <label for="where">
-          <img src="images/icon_pin.png" class="label-icon" alt="どこ">
-          どこ？
-        </label>
-        <input type="text" id="where" name="where" placeholder="例：自分の部屋、大学の出入り口" required>
+      <form id="myForm">
+        <div class="form-group">
+          <label for="where">
+            <img src="images/icon_pin.png" class="label-icon" alt="どこ">
+            どこ？
+          </label>
+          <input type="text" id="where" name="where" placeholder="例：自分の部屋、大学の出入り口" required>
+        </div>
+
+        <div class="form-group">
+          <label for="situation">
+            <img src="images/icon_chat.png" class="label-icon" alt="状況">
+            どんな状況？
+          </label>
+          <input type="text" id="situation" name="situation" placeholder="例：作業の間にふと視線をずらしたらインクが目に入った" required>
+        </div>
+
+        <div class="form-group">
+          <label for="kind">
+            <img src="images/icon_sparkle.png" class="label-icon" alt="神様">
+            どんな神様？
+          </label>
+          <input type="text" id="kind" name="kind" placeholder="例：使ってないものに視線を誘導する神様" required>
+        </div>
+
+        <div class="form-group">
+          <label for="thought">
+            <img src="images/icon_heart.png" class="label-icon" alt="感想">
+            どう思った？
+          </label>
+          <textarea id="thought" name="thought" placeholder="最近使ってないけどもういらないかな？いや、結構大事かも..." required></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">送信する</button>
+      </form>
+      
+      <div class="footer">
+        © 2025 Affective Design Lab
+      </div>
+    </div>
+
+    <div class="posts-column">
+      <!-- 投稿一覧のヘッダー -->
+      <div class="posts-section-header">
+        <h2>みんなが見つけた神様</h2>
+        <p class="instruction">タップで詳しく読む</p>
       </div>
 
-      <div class="form-group">
-        <label for="situation">
-          <img src="images/icon_chat.png" class="label-icon" alt="状況">
-          どんな状況？
-        </label>
-        <input type="text" id="situation" name="situation" placeholder="例：作業の間にふと視線をずらしたらインクが目に入った" required>
-      </div>
-
-      <div class="form-group">
-        <label for="kind">
-          <img src="images/icon_sparkle.png" class="label-icon" alt="神様">
-          どんな神様？
-        </label>
-        <input type="text" id="kind" name="kind" placeholder="例：使ってないものに視線を誘導する神様" required>
-      </div>
-
-      <div class="form-group">
-        <label for="thought">
-          <img src="images/icon_heart.png" class="label-icon" alt="感想">
-          どう思った？
-        </label>
-        <textarea id="thought" name="thought" placeholder="最近使ってないけどもういらないかな？いや、結構大事かも..." required></textarea>
-      </div>
-
-      <button type="submit" id="submitBtn">送信する</button>
-    </form>
-    
-    <div class="footer">
-      © 2025 Affective Design Lab
+      <!-- ここに投稿が追加されていく -->
+      <div id="loading-msg" style="text-align:center; margin-top:20px; color:#666;">読み込み中...</div>
+      <div id="posts-area"></div>
     </div>
   </div>
-
-  <!-- 投稿一覧のヘッダー -->
-  <div class="posts-section-header">
-    <h2>みんなが見つけた神様</h2>
-    <p class="instruction">タップで詳しく読む</p>
-  </div>
-
-  <!-- ここに投稿が追加されていく -->
-  <div id="loading-msg" style="text-align:center; margin-top:20px; color:#666;">読み込み中...</div>
-  <div id="posts-area"></div>
 
   <!-- 研究室情報 -->
   <div class="lab-info">
